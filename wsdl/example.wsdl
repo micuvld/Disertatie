@@ -1,0 +1,51 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<description
+        xmlns = "http://www.w3.org/ns/wsdl"
+        targetNamespace = "http://yoursite.com/MyService"
+        xmlns:tns = "http://yoursite.com/MyService"
+        xmlns:stns = "http://yoursite.com/MyService/schema"
+        xmlns:wsoap = "http://www.w3.org/ns/wsdl/soap"
+        xmlns:soap = "http://www.w3.org/2003/05/soap-envelope"
+        xmlns:wsdlx = "http://www.w3.org/ns/wsdl-extensions">
+
+  <documentation>
+    This document describes my Service. You can find additional information in
+    the following web page: http://yoursite.com/MyService/help.html
+  </documentation>
+
+  <types>
+    <xs:schema
+            xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+            targetNamespace = "http://yoursite.com/MyService/schema"
+            xmlns = "http://yoursite.com/MyService/schema" >
+      <xs:element name = "temperature" type="xs:integer" />
+      <xs:element name = "unit_of_measure" type = "xs:string" />
+    </xs:schema>
+  </types>
+
+  <interface name = "sensorInterface">
+    <operation name = "fetchTemperature">
+      <output messageLabel = "temperature" element = "stns:temperature"/>
+    </operation>
+    <operation name = "setUnit">
+      <input messageLabel = "unitOfMeasure" element = "stns:unit_of_measure"/>
+    </operation>
+  </interface>
+
+  <binding name = "sensorApi"
+           interface = "tns:sensorInterface"
+           type = "http://www.w3.org/ns/wsdl/http">
+    <operation ref = "tns:fetchTemperature"/>
+    <operation ref = "tns:setUnit"/>
+  </binding>
+
+  <service name = "sensorService"
+           interface = "tns:sensorInterface">
+    <documentation>
+      Some text as placeholder.
+    </documentation>
+    <endpoint name = "sensorEndpoint"
+              binding = "tns:sensorApi"
+              address = "http://yoursite.com/MyService"/>
+  </service>
+</description>
