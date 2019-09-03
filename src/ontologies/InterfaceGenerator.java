@@ -32,8 +32,9 @@ public class InterfaceGenerator {
     }
 
     public void generateInterface(WsdlPojo wsdlPojo) {
-        List<OWLClass> classes = new ArrayList<>();
+        List<OWLClass> operationsClasses = new ArrayList<>();
         wsdlPojo.getOperations().forEach(operation -> {
+            List<OWLClass> classes = new ArrayList<>();
             List<String> tokens = tokenize(operation.getOperationName());
             tokens.forEach(token -> {
                 classes.add(determineOntologyClass(token));
@@ -41,7 +42,6 @@ public class InterfaceGenerator {
 
             Set<OWLClass> equivalentClasses = dlQueryEngine.getEquivalentClasses(
                     classes.stream().map(this::getClassName).collect(Collectors.joining(" and ")));
-            System.out.println(equivalentClasses);
         });
     }
 

@@ -1,19 +1,9 @@
 package ontologies;
 
 import org.apache.woden.WSDLException;
-import org.apache.woden.WSDLFactory;
-import org.apache.woden.WSDLReader;
-import org.apache.woden.wsdl20.Description;
-import org.apache.woden.wsdl20.xml.DescriptionElement;
-import org.semanticweb.HermiT.Reasoner;
-import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import wsdl.WsdlParser;
 import wsdl.WsdlPojo;
-
-import java.io.File;
-import java.util.Arrays;
-import java.util.Set;
 
 public class MainOntology {
 
