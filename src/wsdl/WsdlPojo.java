@@ -21,7 +21,9 @@ public class WsdlPojo {
                 serviceName,
                 serviceDescription,
                 operations.stream()
-                        .map(operation -> operation.getOperationName() + ":" + operation.getParameters().stream()
+                        .map(operation -> operation.getHttpMethod().toString() + ":"
+                                + operation.getOperationName() + ":"
+                                + operation.getParameters().stream()
                                 .map(param -> param.getDirection() + "::" + param.getName())
                                 .collect(Collectors.joining("-")))
                         .collect(Collectors.joining("\n")));

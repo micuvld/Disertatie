@@ -3,17 +3,17 @@ package wsdl;
 import org.apache.woden.WSDLException;
 import org.apache.woden.WSDLFactory;
 import org.apache.woden.WSDLReader;
-import org.apache.woden.wsdl20.Binding;
-import org.apache.woden.wsdl20.Description;
-import org.apache.woden.wsdl20.InterfaceOperation;
-import org.apache.woden.wsdl20.Service;
+import org.apache.woden.wsdl20.*;
+import org.apache.woden.wsdl20.extensions.ExtensionProperty;
 import org.w3c.dom.Element;
+import rest.HttpMethod;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class WsdlParser {
+    private static final String HTTP_METHOD_EXTENSION_NAME = "http method";
     private final WSDLReader wsdlReader;
 
     public WsdlParser() {
@@ -38,7 +38,7 @@ public class WsdlParser {
     }
 
     private String getServiceDocumentation(Service service) {
-        return ((Element)service.toElement().getDocumentationElements()[0].getContent().getSource()).getTextContent();
+        return ((Element) service.toElement().getDocumentationElements()[0].getContent().getSource()).getTextContent();
     }
 
     private List<ServiceOperation> getOperations(Service service) {
@@ -57,6 +57,7 @@ public class WsdlParser {
 
                 ServiceOperation serviceOperation = ServiceOperation.builder()
                         .operationName(name)
+                        .httpMethod(getMethodOfBindingOperation(bo))
                         .parameters(parameters)
                         .build();
                 serviceOperations.add(serviceOperation);
@@ -64,5 +65,17 @@ public class WsdlParser {
         });
 
         return serviceOperations;
+    }
+
+    private HttpMethod getMethodOfBindingOperation(BindingOperation bindingOperation) {
+        ExtensionProperty httpMethodProperty = Arrays.stream(bindingOperation.getExtensionProperties())
+                .filter(prop -> prop.getName().equals(HTTP_METHOD_EXTENSION_NAME))
+                .findFirst().orElse(null);
+
+        return httpMethodProperty == null
+                ? HttpMethod.NONE
+                : httpMethodProperty.getContent() == null
+                    ? HttpMethod.NONE
+                    : HttpMethod.valueOf(httpMethodProperty.getContent().toString());
     }
 }

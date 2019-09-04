@@ -24,6 +24,6 @@ public class ExampleOfApi {
             result.append(line);
         }
 
-        return result;
+        return 1;
     }
 }
