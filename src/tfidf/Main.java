@@ -3,6 +3,7 @@ package tfidf;
 import tfidf.indexer.DirectIndexer;
 import tfidf.indexer.InverseIndexer;
 import tfidf.indexer.StatsCalculator;
+import tfidf.labeling.Labeler;
 import tfidf.mongo.MongoConnector;
 import tfidf.search.Search;
 import tfidf.utils.Configs;
@@ -25,10 +26,12 @@ public class Main {
         DirectIndexer directIndexer = new DirectIndexer();
         InverseIndexer inverseIndexer = new InverseIndexer();
         StatsCalculator statsCalculator = new StatsCalculator();
+        Labeler labeler = new Labeler();
         directoryParser.parseDirectory(Paths.get(Configs.WORKDIR_PATH), filePaths);
 
         filePaths.forEach(file -> {
             try {
+                labeler.writeLabel(file);
                 directIndexer.reduceFile(directIndexer.mapFile(Paths.get(file)));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -43,7 +46,13 @@ public class Main {
         statsCalculator.calculateNorms(filePaths);
 
         Search search = new Search();
-        search.rankedSearch("some temperature").forEach(file -> System.out.println(file.getFileName() + " | " + file.getScore()));
+        search.rankedSearch("some temperature").forEach(file -> {
+            try {
+                System.out.println(file.getFileName() + " | " + file.getScore() + " | " + labeler.getLabel(file.getFileName()).getLabel());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private static void cleanDatabase() {

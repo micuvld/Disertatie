@@ -36,7 +36,8 @@ public class WordSieve {
     }
 
     public static String toCanonicalForm(String word) {
-        return porter.stripAffixes(word);
+        return word;
+//        return porter.stripAffixes(word);
     }
 
     /**
