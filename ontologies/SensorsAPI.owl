@@ -1,0 +1,715 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#"
+     xml:base="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#hasMethod -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#hasMethod"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#cardinality -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#cardinality">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#color -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#color">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#intensity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#intensity"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#value -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#value">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#asset -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#asset"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#cardinality -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#cardinality"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#configuration -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#configuration"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#configure -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#configure">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#configuration"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#put"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#sensor_api"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#controller -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#controller">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#configure"/>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#roll"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#device -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#device"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#directions -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#directions"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#down -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#down">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#directions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#verb"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#put"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get_value -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get_value">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#physical-quantity"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#sensor_api"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#humidity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#humidity">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#physical-quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#left -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#left">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#directions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#luminous-power -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#luminous-power">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#physical-quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#post"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move_down -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move_down">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#down"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#sensor_api"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move_left -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move_left">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#left"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#sensor_api"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move_right -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move_right">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#right"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#sensor_api"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move_up -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move_up">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#up"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#sensor_api"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#moving_asset -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#moving_asset">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#asset"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#oxygen -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#oxygen">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#physical-quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#physical-quantity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#physical-quantity"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#post -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#post">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#verb"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#pressure -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#pressure">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#physical-quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#put -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#put">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#verb"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#reset -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#reset">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#verb"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#right -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#right">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#directions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#roll -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#roll">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#post"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#rotate -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#rotate">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#post"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#sensor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#sensor">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#configure"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get_value"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#sensor_api -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#sensor_api"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#static_asset -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#static_asset">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#asset"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#unit_of_measure -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#unit_of_measure"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#up -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#up">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#directions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#verb -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#verb"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#access -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#access">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#add -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#add">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#post"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#append -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#append">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#post"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#aquire -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#aquire">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#capture -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#capture">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#celsius -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#celsius">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#unit_of_measure"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#centimeter -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#centimeter">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#unit_of_measure"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#curtain -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#curtain">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#moving_asset"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#disable -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#disable">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#reset"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#enable -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#enable"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#fahrenheit -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#fahrenheit">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#unit_of_measure"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#fetch -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#fetch">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#frequency -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#frequency">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#configuration"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#gain -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#gain">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get_temperature -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get_temperature">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get_value"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#grab -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#grab">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#h -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#h">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#humidity"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#humid -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#humid">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#humidity"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#humidity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#humidity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#humidity"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#insert -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#insert"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#led -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#led">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#static_asset"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#light-bulb -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#light-bulb">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#static_asset"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#millimeter -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#millimeter">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#unit_of_measure"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#obtain -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#obtain">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#place -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#place">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#put"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#pull -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#pull">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#push -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#push">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#move"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#receive -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#receive">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#replace -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#replace">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#put"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#roll -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#roll">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#moving_asset"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#set -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#set">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#put"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#speaker -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#speaker">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#static_asset"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#speed -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#speed">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#configuration"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#t -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#t"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#take -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#take">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#temp -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#temp"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#temperature -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#temperature">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#physical-quantity"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#unit -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#unit">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#configuration"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

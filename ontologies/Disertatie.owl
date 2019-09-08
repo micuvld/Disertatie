@@ -1,0 +1,458 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#"
+     xml:base="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasMainTerm -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasMainTerm"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasPrimaryMethod -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasPrimaryMethod">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasSecondaryMethod -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasSecondaryMethod">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#inParam -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#inParam"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#isAbstract -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#isAbstract"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#outParam -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#outParam">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#config -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#config"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#device -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#device"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get_physical_quantity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get_physical_quantity">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get_value"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#physical_quantity"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#method"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get_value -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get_value">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#outParam"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#method"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#method -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#method"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#object -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#object">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#value"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#physical_quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#physical_quantity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#physical_quantity">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#value"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#verb"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#sensor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#sensor">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasPrimaryMethod"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get_physical_quantity"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasSecondaryMethod"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#set_config"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#set_config -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#set_config">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#config"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#inParam"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#inParam"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#method"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#value -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#value"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#verb -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#verb"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#verb"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#acquire -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#acquire">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#actuator -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#actuator">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#device"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#fetch -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#fetch">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#gain -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#gain">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get_value -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get_value">
+        <rdf:type>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#physical_quantity"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#outParam"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdf:type>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#grab -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#grab">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#humidity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#humidity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#physical_quantity"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#obtain -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#obtain">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#override -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#override">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#oxygen -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#oxygen">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#physical_quantity"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#pressure -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#pressure">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#physical_quantity"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#pull -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#pull">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#replace -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#replace">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#set -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#set">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#set_config -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#set_config">
+        <rdf:type>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#config"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#inParam"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#inParam"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+            </owl:Restriction>
+        </rdf:type>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#take -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#take">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#temp -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#temp">
+        <owl:sameAs rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#temperature"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#temperature -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#temperature">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#physical_quantity"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#temperature_sensor -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#temperature_sensor">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#sensor"/>
+        <hasMainTerm rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#temperature"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#write -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#write">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
