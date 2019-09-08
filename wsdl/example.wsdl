@@ -1,21 +1,16 @@
 <?xml version = "1.0" encoding = "utf-8" ?>
 <description
         xmlns = "http://www.w3.org/ns/wsdl"
-        targetNamespace = "http://yoursite.com/MyService"
-        xmlns:tns = "http://yoursite.com/MyService"
-        xmlns:stns = "http://yoursite.com/MyService/schema"
+        targetNamespace = "http://www.sensors.com/"
+        xmlns:tns = "http://www.sensors.com/"
+        xmlns:stns = "http://www.sensors.com/schema"
         xmlns:whttp="http://www.w3.org/ns/wsdl/http">
-
-  <documentation>
-    This document describes my Service. You can find additional information in
-    the following web page: http://yoursite.com/MyService/help.html
-  </documentation>
 
   <types>
     <xs:schema
-            xmlns:xs = "http://www.w3.org/2001/XMLSchema"
-            targetNamespace = "http://yoursite.com/MyService/schema"
-            xmlns = "http://yoursite.com/MyService/schema" >
+            targetNamespace="http://www.sensors.com/schema"
+            xmlns = "http://www.sensors.com/schema"
+            xmlns:xs = "http://www.w3.org/2001/XMLSchema">
       <xs:element name = "temperature" type="xs:integer" />
       <xs:element name = "unit_of_measure" type = "xs:string" />
     </xs:schema>
@@ -40,10 +35,13 @@
   <service name = "sensorService"
            interface = "tns:sensorInterface">
     <documentation>
-      Some text as placeholder.
+      This service encapsulates a temperature sensor device. The device is capturing the temperature and offering it
+      through a REST interface. The default scale of measure is Celsius. Other scales provided are Fahrenheit and Kelvin
+      This sensor offers HTTP methods for fetching the current temperature measured by the sensor and setting the scale
+      desired for the temperature data.
     </documentation>
     <endpoint name = "sensorEndpoint"
               binding = "tns:sensorApi"
-              address = "http://yoursite.com/MyService"/>
+              address = "http://sensors.com/temperature_sensor"/>
   </service>
 </description>

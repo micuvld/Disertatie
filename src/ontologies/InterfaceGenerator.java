@@ -34,17 +34,8 @@ public class InterfaceGenerator {
     public void getSmth(WsdlPojo wsdlPojo) {
         OWLIndividual owlIndividual = dataFactory.getOWLNamedIndividual(IRI.create(baseIri, "temperature_sensor"));
 
-        //get mainTerm
-
-        //find abstract
         Set<OWLClassExpression> deviceTypes = owlIndividual.getTypes(ontology);
-        System.out.println(deviceTypes.stream().map(cls -> cls.asOWLClass().getIRI().getFragment()).collect(Collectors.joining("####")));
         deviceTypes.forEach(type -> {
-//            System.out.println(type.asOWLClass().getObjectPropertiesI);
-            System.out.println(type.toString());
-            System.out.println(type.getClassExpressionType());
-            ObjectMinCardinalityVisitor objectMinCardinalityVisitor = new ObjectMinCardinalityVisitor();
-
             type.asOWLClass().getEquivalentClasses(ontology).stream().forEach(eqCls -> {
                 ModeledDevice modeledDevice = new ModeledDevice();
                 dive(eqCls, modeledDevice);
@@ -167,12 +158,19 @@ public class InterfaceGenerator {
         //params and classes
         ModeledMethod modeledMethod = new ModeledMethod();
 
-        owlClass.getEquivalentClasses(ontology).forEach(eqCls -> {
+        Set<OWLClassExpression> eqClasses = owlClass.getEquivalentClasses(ontology);
+        if (eqClasses.isEmpty()) {
+            owlClass.getSuperClasses(ontology)
+                    .forEach(superClass -> eqClasses.addAll(superClass.asOWLClass().getEquivalentClasses(ontology)));
+        }
+
+        eqClasses.forEach(eqCls -> {
             switch(eqCls.getClassExpressionType()) {
                 case OBJECT_INTERSECTION_OF:
                     eqCls.asConjunctSet().forEach(subExp -> {
                         switch (subExp.getClassExpressionType()) {
                             case OWL_CLASS:
+                                //TODO: if it has equivalent classes, then split
                                 modeledMethod.addClass(new ModeledClass(subExp.asOWLClass().getIRI().getFragment()));
                                 break;
                             case DATA_MIN_CARDINALITY:
