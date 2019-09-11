@@ -1,9 +1,6 @@
 package models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.apache.woden.internal.wsdl20.InterfaceMessageReferenceImpl;
 import org.apache.woden.wsdl20.InterfaceMessageReference;
 
@@ -13,10 +10,11 @@ import static javax.annotation.processing.Completions.of;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = {"direction", "paramType"})
+@NoArgsConstructor
 public class ModeledParam {
-    private final String name;
-    private final ParamDirection direction;
-    private final ParamType paramType;
+    private String name;
+    private ParamDirection direction;
+    private ParamType paramType;
 
     public static ModeledParam fromInterfaceMessageReference(InterfaceMessageReference interfaceMessageReference) {
         return ModeledParam.builder()

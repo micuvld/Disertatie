@@ -1,5 +1,7 @@
 package rest;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 import models.ModeledOntologyDevice;
@@ -11,8 +13,17 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 public class RestInterface {
+    @JsonProperty("endpoint")
     private String endpoint;
+    @JsonProperty("methods")
     private List<RestMethod> methods;
+
+    @JsonCreator
+    public RestInterface(@JsonProperty("endpoint") String endpoint,
+                         @JsonProperty("methods") List<RestMethod> methods) {
+        this.endpoint = endpoint;
+        this.methods = methods;
+    }
 
     public static RestInterface fromModeledDevice(ModeledOntologyDevice modeledOntologyDevice, WsdlPojo wsdlPojo) {
         return RestInterface.builder()

@@ -28,7 +28,6 @@ public class WsdlParser {
     }
 
     public WsdlPojo parseWsdl(String wsdlUrl) throws WSDLException {
-        wsdlUrl = "/home/vlad/ws/Disertatie/wsdl/example.wsdl";
         Description descComp = wsdlReader.readWSDL(wsdlUrl);
         Service service = descComp.getServices()[0];
         return WsdlPojo.builder()

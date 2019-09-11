@@ -1,6 +1,8 @@
 package models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import rest.HttpMethod;
 
 import java.util.ArrayList;

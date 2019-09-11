@@ -1,5 +1,7 @@
 package rest;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.xml.internal.ws.util.StringUtils;
 import lombok.Builder;
 import lombok.Data;
@@ -15,15 +17,25 @@ import java.util.stream.Collectors;
 @Builder
 public class RestMethod {
     //shown to the user in UI, in order to briefly describe the method
+    @JsonProperty("label")
     private String label;
+    @JsonProperty("httpMethod")
     private HttpMethod httpMethod;
+    @JsonProperty("path")
     private String path;
+    @JsonProperty("params")
     private List<ModeledParam> params;
 
-    @Data
-    public static class RestParam {
-        private String name;
-        private String type;
+    @JsonCreator
+    public RestMethod(
+            @JsonProperty("label") String label,
+            @JsonProperty("httpMethod") HttpMethod httpMethod,
+            @JsonProperty("path") String path,
+            @JsonProperty("params") List<ModeledParam> params) {
+        this.label = label;
+        this.httpMethod = httpMethod;
+        this.path = path;
+        this.params = params;
     }
 
     public static RestMethod fromModeledMethod(ModeledMethod method) {
