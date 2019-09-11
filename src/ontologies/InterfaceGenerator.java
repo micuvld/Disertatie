@@ -65,6 +65,7 @@ public class InterfaceGenerator {
                 //get the actual matching model, which consists of the methods from the expectedModel that have
                 //a match in the wsdl model
                 matchingModel = getMatchingModel(expectedModel, modeledWSDLDevice);
+                matchingModel.setDeviceLabel(deviceLabel);
                 //if not all of the primary methods from the expected model have a match in the wsdl model
                 //then we consider that the device is invalid, because it can't provide the functionalities
                 //that we expect it to

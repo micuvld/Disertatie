@@ -10,9 +10,6 @@
     <operation name = "fetchTemperature">
       <output messageLabel = "temperature" element = "xs:double"/>
     </operation>
-    <operation name = "configureThreshold">
-      <input messageLabel = "threshold" element = "xs:double"/>
-    </operation>
     <operation name = "setScale">
       <input messageLabel = "scale" element = "xs:integer"/>
     </operation>
@@ -22,19 +19,19 @@
            interface = "tns:sensorInterface"
            type = "http://www.w3.org/ns/wsdl/http">
     <operation ref = "tns:fetchTemperature" whttp:method = "GET"/>
-    <operation ref = "tns:configureThreshold" whttp:method = "PUT"/>
     <operation ref = "tns:setScale" whttp:method = "PUT"/>
   </binding>
 
   <service name = "sensorService"
            interface = "tns:sensorInterface">
     <documentation>
-      This service encapsulates a thermostat device. The device is capturing the temperature and offering methods to set a desired temperature.
-      Depending on the temperature level that is configured, the device will trigger an output signal that can be wired to a heating device.
-      This sensor offers HTTP methods for fetching the current temperature measured by the sensor and setting the threshold for the output trigger.
+      This service encapsulates a temperature sensor device. The device is capturing the temperature and offering it
+      through a REST interface. The default scale of measure is Celsius. Other scales provided are Fahrenheit and Kelvin
+      This sensor offers HTTP methods for fetching the current temperature measured by the sensor and setting the scale
+      desired for the temperature data.
     </documentation>
     <endpoint name = "sensorEndpoint"
               binding = "tns:sensorApi"
-              address = "http://sensors.com/thermostat"/>
+              address = "http://sensors.com/temperature_sensor"/>
   </service>
 </description>

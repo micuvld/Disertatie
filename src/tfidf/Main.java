@@ -44,8 +44,6 @@ public class Main {
         }
 
         statsCalculator.calculateNorms(filePaths);
-
-
     }
 
     private static void cleanDatabase() {

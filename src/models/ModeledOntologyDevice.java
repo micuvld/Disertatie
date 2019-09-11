@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class ModeledOntologyDevice {
+    private String deviceLabel;
     //primary methods: methods that are mandatory to be present
     private List<ModeledMethod> primaryMethods;
     //secondary methods: methods that can be integrated with human assistance
