@@ -1,7 +1,6 @@
 package tfidf.indexer;
 
 import tfidf.utils.Configs;
-import tfidf.utils.porter.Porter;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -21,7 +20,6 @@ public class WordSieve {
 
     private final static List<String> stopWords = new ArrayList<String>();
     private final static List<String> exceptionWords = new ArrayList<String>();
-    private final static Porter porter = new Porter();
 
     static {
         populateExceptionAndStopLists();
@@ -33,11 +31,6 @@ public class WordSieve {
 
     public static boolean isStopWord(String word) {
         return stopWords.contains(word);
-    }
-
-    public static String toCanonicalForm(String word) {
-        return word;
-//        return porter.stripAffixes(word);
     }
 
     /**

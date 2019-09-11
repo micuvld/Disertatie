@@ -115,8 +115,6 @@ public class Search {
             if (WordSieve.isStopWord(token)) {
                 return;
             }
-
-            token = WordSieve.toCanonicalForm(token);
         }
 
         tokens.add(token);

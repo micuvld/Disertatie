@@ -77,8 +77,6 @@ public class DirectIndexer {
             if (WordSieve.isStopWord(word)) {
                 return;
             }
-
-            word = WordSieve.toCanonicalForm(word);
         }
 
         mappedFile.mapWord(word);
