@@ -35,6 +35,7 @@ public class WsdlParser {
                 .serviceName(service.getName().getLocalPart())
                 .serviceDescription(getServiceDocumentation(service))
                 .operations(getOperations(service))
+                .endpoint(service.getEndpoints()[0].getAddress().toString())
                 .build();
     }
 

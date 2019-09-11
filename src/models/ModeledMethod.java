@@ -34,8 +34,8 @@ public class ModeledMethod {
         }
 
         //to match params
-        if (this.params.containsAll(methodToMatch.params)
-                && methodToMatch.params.containsAll(this.params)) {
+        if (!(this.params.containsAll(methodToMatch.params)
+                && methodToMatch.params.containsAll(this.params))) {
             return false;
         }
 

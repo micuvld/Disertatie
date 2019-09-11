@@ -25,4 +25,9 @@ public class ModeledParam {
                 .paramType(ParamType.fromXmlDataType(((InterfaceMessageReferenceImpl)interfaceMessageReference).getElement().getQName().getLocalPart()))
                 .build();
     }
+
+    @Override
+    public String toString() {
+        return "\t\t" + name + ":" + direction.name() + "::" + paramType.name();
+    }
 }

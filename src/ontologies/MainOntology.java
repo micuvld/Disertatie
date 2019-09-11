@@ -1,15 +1,12 @@
 package ontologies;
 
-import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import exceptions.InvalidIndividualException;
 import exceptions.PrimaryMethodsNotMatchingException;
 import org.apache.woden.WSDLException;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import rest.RestInterface;
 import tfidf.labeling.Labeler;
 import tfidf.search.Search;
 import tfidf.utils.Configs;
@@ -37,7 +34,7 @@ public class MainOntology {
                 "http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#",
                 "/home/vlad/ws/Disertatie/ontologies/Disertatie.owl");
         try {
-            System.out.println(objectMapper.writeValueAsString(interfaceGenerator.getMatchingModel(wsdlPojo, deviceLabel)));
+            System.out.println(RestInterface.fromModeledDevice(interfaceGenerator.getMatchingModel(wsdlPojo, deviceLabel), wsdlPojo));
         } catch (PrimaryMethodsNotMatchingException | InvalidIndividualException e) {
             e.printStackTrace();
         }

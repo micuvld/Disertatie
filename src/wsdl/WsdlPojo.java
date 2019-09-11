@@ -12,12 +12,14 @@ public class WsdlPojo {
     private final String serviceName;
     private final String serviceDescription;
     private final List<ServiceOperation> operations;
+    private final String endpoint;
 
     @Override
     public String toString() {
         return String.format("Service Name: %s\n" +
                         "Service Description: %s\n" +
-                        "Service Operations: \n%s\n",
+                        "Service Operations: \n%s\n" +
+                        "Endpoint: %s\n",
                 serviceName,
                 serviceDescription,
                 operations.stream()
@@ -26,6 +28,7 @@ public class WsdlPojo {
                                 + operation.getParameters().stream()
                                 .map(param -> param.getDirection() + "::" + param.getName())
                                 .collect(Collectors.joining("-")))
-                        .collect(Collectors.joining("\n")));
+                        .collect(Collectors.joining("\n")),
+                endpoint);
     }
 }

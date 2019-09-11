@@ -8,7 +8,7 @@
 
   <interface name = "sensorInterface">
     <operation name = "fetchTemperature">
-      <output messageLabel = "temperature" element = "xs:integer"/>
+      <output messageLabel = "temperature" element = "xs:double"/>
     </operation>
     <operation name = "setScale">
       <input messageLabel = "scale" element = "xs:string"/>
