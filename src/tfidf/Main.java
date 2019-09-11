@@ -45,14 +45,7 @@ public class Main {
 
         statsCalculator.calculateNorms(filePaths);
 
-        Search search = new Search();
-        search.rankedSearch("some temperature").forEach(file -> {
-            try {
-                System.out.println(file.getFileName() + " | " + file.getScore() + " | " + labeler.getLabel(file.getFileName()).getLabel());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+
     }
 
     private static void cleanDatabase() {

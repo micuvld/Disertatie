@@ -1,5 +1,6 @@
 package wsdl;
 
+import models.ModeledParam;
 import org.apache.woden.WSDLException;
 import org.apache.woden.WSDLFactory;
 import org.apache.woden.WSDLReader;
@@ -49,10 +50,10 @@ public class WsdlParser {
             Arrays.stream(binding.getBindingOperations()).forEach(bo -> {
                 InterfaceOperation io = bo.getInterfaceOperation();
                 String name = io.getName().getLocalPart();
-                List<OperationParameter> parameters = new ArrayList<>();
+                List<ModeledParam> parameters = new ArrayList<>();
 
                 Arrays.stream(io.getInterfaceMessageReferences()).forEach(imr -> {
-                    parameters.add(OperationParameter.fromInterfaceMessageReference(imr));
+                    parameters.add(ModeledParam.fromInterfaceMessageReference(imr));
                 });
 
                 ServiceOperation serviceOperation = ServiceOperation.builder()

@@ -1,4 +1,4 @@
-package ontologies;
+package models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

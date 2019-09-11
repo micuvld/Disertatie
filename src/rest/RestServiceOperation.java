@@ -2,7 +2,7 @@ package rest;
 
 import lombok.Builder;
 import lombok.Data;
-import wsdl.OperationParameter;
+import models.ModeledParam;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ import java.util.List;
 @Builder
 public class RestServiceOperation {
     private final String operationName;
-    private final List<OperationParameter> parameters;
+    private final List<ModeledParam> parameters;
 }

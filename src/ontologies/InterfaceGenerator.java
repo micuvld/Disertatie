@@ -1,18 +1,19 @@
 package ontologies;
 
-import org.apache.tools.ant.filters.StringInputStream;
+import exceptions.InvalidIndividualException;
+import exceptions.PrimaryMethodsNotMatchingException;
+import models.*;
 import org.semanticweb.HermiT.Reasoner;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.reasoner.Node;
-import org.semanticweb.owlapi.util.OWLClassExpressionCollector;
-import org.semanticweb.owlapi.util.SimpleShortFormProvider;
 import rest.HttpMethod;
-import uk.ac.manchester.cs.owl.owlapi.*;
 import wsdl.WsdlPojo;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InterfaceGenerator {
@@ -20,7 +21,6 @@ public class InterfaceGenerator {
     private final Reasoner reasoner;
     private final OWLOntology ontology;
     private final OWLDataFactory dataFactory;
-    private final DLQueryEngine dlQueryEngine;
 
     public InterfaceGenerator(String baseIri, String ontologyLocation) throws OWLOntologyCreationException {
         this.baseIri = baseIri;
@@ -28,114 +28,98 @@ public class InterfaceGenerator {
         ontology = owlOntologyManager.loadOntologyFromOntologyDocument(new File(ontologyLocation));
         this.dataFactory = owlOntologyManager.getOWLDataFactory();
         this.reasoner = new Reasoner(ontology);
-        this.dlQueryEngine = new DLQueryEngine(reasoner, new SimpleShortFormProvider());
     }
 
-    public void getSmth(WsdlPojo wsdlPojo) {
-        OWLIndividual owlIndividual = dataFactory.getOWLNamedIndividual(IRI.create(baseIri, "temperature_sensor"));
+    public ModeledOntologyDevice getMatchingModel(WsdlPojo wsdlPojo, String deviceLabel)
+            throws PrimaryMethodsNotMatchingException, InvalidIndividualException {
+        ModeledOntologyDevice matchingModel = null;
+        OWLIndividual owlIndividual = dataFactory.getOWLNamedIndividual(IRI.create(baseIri, deviceLabel));
 
-        Set<OWLClassExpression> deviceTypes = owlIndividual.getTypes(ontology);
-        deviceTypes.forEach(type -> {
-            type.asOWLClass().getEquivalentClasses(ontology).stream().forEach(eqCls -> {
-                ModeledDevice modeledDevice = new ModeledDevice();
-                dive(eqCls, modeledDevice);
+        Set<OWLClassExpression> deviceTypes = owlIndividual.getTypes(ontology); //it will give the device types
+        if (!deviceTypes.iterator().hasNext()) {
+            throw new InvalidIndividualException();
+        }
 
-                modeledDevice.getPrimaryMethods().forEach(primaryOperation -> {
-            wsdlPojo.getOperations().forEach(wsdlOperation -> {
-                if (primaryOperation.getHttpMethod().equals(wsdlOperation.getHttpMethod())) {
-                    //found matching method
-                    //need to see if the ontology is ok as well
+        //devices have a single type that may be a single class or a conjunction of multiple classes
+        //if the type is a conjunction of multiple classes, it means that we have a complex device built from
+        //functionalities of multiple basic devices
+        OWLClassExpression deviceType = deviceTypes.iterator().next();
+        Set<OWLClassExpression> deviceClasses = new HashSet<>();
+        if (deviceType.getClassExpressionType().equals(ClassExpressionType.OWL_CLASS)) {
+            deviceClasses.add(deviceType.asOWLClass());
+        } else if (deviceType.getClassExpressionType().equals(ClassExpressionType.OBJECT_INTERSECTION_OF)) {
+            deviceClasses = deviceType.asConjunctSet();
+        }
+
+        //go through each device class and gather the primary and secondary methods
+        for (OWLClassExpression deviceClass : deviceClasses) {
+            //equivalent classes are the methods of the device
+            for (OWLClassExpression eqCls : deviceClass.asOWLClass().getEquivalentClasses(ontology)) {
+                ModeledOntologyDevice expectedModel = new ModeledOntologyDevice();
+                //create the expected model using the ontology
+                dive(eqCls, expectedModel);
+
+                //create the wsdl model, using the information from the WSDL and the ontology
+                ModeledWSDLDevice modeledWSDLDevice = getWsdlModeledDevice(wsdlPojo);
+
+                //get the actual matching model, which consists of the methods from the expectedModel that have
+                //a match in the wsdl model
+                matchingModel = getMatchingModel(expectedModel, modeledWSDLDevice);
+                //if not all of the primary methods from the expected model have a match in the wsdl model
+                //then we consider that the device is invalid, because it can't provide the functionalities
+                //that we expect it to
+                if (matchingModel.getPrimaryMethods().size() < expectedModel.getPrimaryMethods().size()) {
+                    throw new PrimaryMethodsNotMatchingException();
+                }
+            }
+        }
+
+        return matchingModel;
+    }
+
+    public ModeledOntologyDevice getMatchingModel(ModeledOntologyDevice expectedModel, ModeledWSDLDevice wsdlModel) {
+        ModeledOntologyDevice matchingModel = new ModeledOntologyDevice();
+        wsdlModel.getMethods().forEach(wsdlMethod -> {
+            boolean matches = expectedModel.getPrimaryMethods().stream().anyMatch(wsdlMethod::matchesWith);
+            if (matches) {
+                matchingModel.addPrimaryMethod(wsdlMethod);
+            } else {
+                matches = expectedModel.getSecondaryMethods().stream().anyMatch(wsdlMethod::matchesWith);
+                if (matches) {
+                    matchingModel.addSecondaryMethod(wsdlMethod);
+                }
+            }
+        });
+
+        return matchingModel;
+    }
+
+    public ModeledWSDLDevice getWsdlModeledDevice(WsdlPojo wsdlPojo) {
+        ModeledWSDLDevice modeledWSDLDevice = new ModeledWSDLDevice();
+
+        wsdlPojo.getOperations().forEach(wsdlOperation -> {
                     List<OWLClass> wsdlOwlClasses = determineOntologyClasses(wsdlOperation.getOperationName());
 
-                    List<String> stringWsdlOwlClasses = wsdlOwlClasses.stream()
-                            .map(owlClass -> owlClass.getIRI().getFragment())
-                            .collect(Collectors.toList());
-                    List<String> primaryOperationStringClasses = primaryOperation.getClasses().stream()
-                            .map(ModeledClass::getClassName)
-                            .collect(Collectors.toList());
-
-                    if (stringWsdlOwlClasses.containsAll(primaryOperationStringClasses)
-                            && primaryOperationStringClasses.containsAll(stringWsdlOwlClasses)) {
-                        System.out.println("Found matching methods");
-                    }
+                    ModeledMethod modeledMethod = new ModeledMethod();
+                    modeledMethod.setName(wsdlOperation.getOperationName());
+                    modeledMethod.setClasses(wsdlOwlClasses.stream()
+                            .map(owlClass -> new ModeledClass(owlClass.getIRI().getFragment()))
+                            .collect(Collectors.toList()));
+                    modeledMethod.setHttpMethod(wsdlOperation.getHttpMethod());
+                    modeledMethod.setParams(wsdlOperation.getParameters().stream()
+                            .map(wsdlOp -> new ModeledParam(wsdlOp.getName(), wsdlOp.getDirection(), wsdlOp.getParamType()))
+                            .collect(Collectors.toList()));
+                    modeledWSDLDevice.addMethod(modeledMethod);
                 }
-            });
-        });
+        );
 
-
-                    }
-            );
-        });
-
-
-
-//        List<ModeledMethod> primaryMethods = new ArrayList<>();
-//        List<ModeledMethod> secondaryMethods = new ArrayList<>();
-//        objectPropertyValues.entrySet().forEach(entry -> {
-//            String objectProperty = entry.getKey().getNamedProperty().getIRI().getFragment();
-//
-//            entry.getValue().stream().forEach(method -> {
-//
-//                Set<OWLClassExpression> types = method.getTypes(ontology);
-//                types.forEach(type -> {
-//                    switch (type.getClassExpressionType()) {
-//                        case OBJECT_INTERSECTION_OF:
-//
-//                            //TODO: add the case where you check for params
-////                            case DATA_MIN_CARDINALITY:
-////                                modeledMethod.get
-////                                type.asOWLClass().getReferencingAxioms(ontology).forEach(axiom -> System.out.println(axiom.isOfType(AxiomType.DATA_PROPERTY_ASSERTION)));
-//////                                OWLDataMinCardinality owlDataMinCardinality = new OWLDataMinCardinalityImpl()
-//                    }
-//                });
-//
-//                //set method based on the found classes
-//                modeledMethod.getClasses().forEach(methodClass -> {
-//                    if (HttpMethod.isHttpMethod(methodClass.getClassName())) {
-//                        modeledMethod.setHttpMethod(HttpMethod.valueOf(methodClass.getClassName().toUpperCase()));
-//                    }
-//                });
-//
-//                if (objectProperty.equals("hasPrimaryMethod")) {
-//                    primaryMethods.add(modeledMethod);
-//                }
-//
-//                if (objectProperty.equals("hasSecondaryMethod")) {
-//                    secondaryMethods.add(modeledMethod);
-//                }
-//            });
-//        });
-//
-//        primaryMethods.forEach(primaryOperation -> {
-//            wsdlPojo.getOperations().forEach(wsdlOperation -> {
-//                if (primaryOperation.getHttpMethod().equals(wsdlOperation.getHttpMethod())) {
-//                    //found matching method
-//                    //need to see if the ontology is ok as well
-//                    List<OWLClass> wsdlOwlClasses = determineOntologyClasses(wsdlOperation.getOperationName());
-//
-//                    List<String> stringWsdlOwlClasses = wsdlOwlClasses.stream()
-//                            .map(owlClass -> owlClass.getIRI().getFragment())
-//                            .collect(Collectors.toList());
-//                    List<String> primaryOperationStringClasses = primaryOperation.getClasses().stream()
-//                            .map(ModeledClass::getClassName)
-//                            .collect(Collectors.toList());
-//
-//                    if (stringWsdlOwlClasses.containsAll(primaryOperationStringClasses)
-//                            && primaryOperationStringClasses.containsAll(stringWsdlOwlClasses)) {
-//                        System.out.println("Found matching methods");
-//                    }
-//                }
-//            });
-//        });
-
-        System.out.println("hi");
+        return modeledWSDLDevice;
     }
 
-    public void dive(OWLClassExpression ce, ModeledDevice modeledDevice) {
-        System.out.println(ce + "\n########\n");
+    public void dive(OWLClassExpression ce, ModeledOntologyDevice modeledOntologyDevice) {
         switch (ce.getClassExpressionType()) {
             case OBJECT_INTERSECTION_OF:
-                ce.asConjunctSet().forEach(subCe -> dive(subCe, modeledDevice));
+                ce.asConjunctSet().forEach(subCe -> dive(subCe, modeledOntologyDevice));
                 break;
             case OBJECT_MIN_CARDINALITY:
                 OWLObjectMinCardinality minCardinality = ((OWLObjectMinCardinality) ce);
@@ -143,10 +127,10 @@ public class InterfaceGenerator {
 
                 switch (objectProperty) {
                     case "hasPrimaryMethod":
-                        modeledDevice.addPrimaryMethod(getModeledMethod(minCardinality.getFiller().asOWLClass()));
+                        modeledOntologyDevice.addPrimaryMethod(getModeledMethod(minCardinality.getFiller().asOWLClass()));
                         break;
                     case "hasSecondaryMethod":
-                        modeledDevice.addSecondaryMethod(getModeledMethod(minCardinality.getFiller().asOWLClass()));
+                        modeledOntologyDevice.addSecondaryMethod(getModeledMethod(minCardinality.getFiller().asOWLClass()));
                         break;
                 }
                 break;
@@ -159,25 +143,23 @@ public class InterfaceGenerator {
         ModeledMethod modeledMethod = new ModeledMethod();
 
         Set<OWLClassExpression> eqClasses = owlClass.getEquivalentClasses(ontology);
-        if (eqClasses.isEmpty()) {
-            owlClass.getSuperClasses(ontology)
-                    .forEach(superClass -> eqClasses.addAll(superClass.asOWLClass().getEquivalentClasses(ontology)));
-        }
 
         eqClasses.forEach(eqCls -> {
-            switch(eqCls.getClassExpressionType()) {
+            switch (eqCls.getClassExpressionType()) {
                 case OBJECT_INTERSECTION_OF:
                     eqCls.asConjunctSet().forEach(subExp -> {
                         switch (subExp.getClassExpressionType()) {
                             case OWL_CLASS:
-                                //TODO: if it has equivalent classes, then split
                                 modeledMethod.addClass(new ModeledClass(subExp.asOWLClass().getIRI().getFragment()));
                                 break;
                             case DATA_MIN_CARDINALITY:
-                                //to add support for parameters
-                            case DATA_EXACT_CARDINALITY:
-                                //to add support for parameters
-                                System.out.println("No support for parameters yet");
+                                OWLDataMinCardinality minCardinality = (OWLDataMinCardinality) subExp;
+                                String dataProperty = minCardinality.getProperty().asOWLDataProperty().getIRI().getFragment();
+                                modeledMethod.addParam(new ModeledParam(
+                                        null,
+                                        ParamDirection.fromOntologyProperty(dataProperty),
+                                        ParamType.fromOwlDatatype(minCardinality.getFiller().asOWLDatatype()))
+                                );
                                 break;
                         }
                     });
@@ -191,20 +173,6 @@ public class InterfaceGenerator {
         });
 
         return modeledMethod;
-    }
-
-    public void generateInterface(WsdlPojo wsdlPojo) {
-        List<OWLClass> operationsClasses = new ArrayList<>();
-        wsdlPojo.getOperations().forEach(operation -> {
-            List<OWLClass> classes = new ArrayList<>();
-            List<String> tokens = tokenize(operation.getOperationName());
-            tokens.forEach(token -> {
-                classes.add(determineOntologyClass(token));
-            });
-
-            Set<OWLClass> equivalentClasses = dlQueryEngine.getEquivalentClasses(
-                    classes.stream().map(this::getClassName).collect(Collectors.joining(" and ")));
-        });
     }
 
     private List<OWLClass> determineOntologyClasses(String operationName) {

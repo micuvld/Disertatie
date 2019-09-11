@@ -3,25 +3,15 @@
         xmlns = "http://www.w3.org/ns/wsdl"
         targetNamespace = "http://www.sensors.com/"
         xmlns:tns = "http://www.sensors.com/"
-        xmlns:stns = "http://www.sensors.com/schema"
+        xmlns:xs = "http://www.w3.org/2001/XMLSchema"
         xmlns:whttp="http://www.w3.org/ns/wsdl/http">
-
-  <types>
-    <xs:schema
-            targetNamespace="http://www.sensors.com/schema"
-            xmlns = "http://www.sensors.com/schema"
-            xmlns:xs = "http://www.w3.org/2001/XMLSchema">
-      <xs:element name = "temperature" type="xs:integer" />
-      <xs:element name = "unit_of_measure" type = "xs:string" />
-    </xs:schema>
-  </types>
 
   <interface name = "sensorInterface">
     <operation name = "fetchTemperature">
-      <output messageLabel = "temperature" element = "stns:temperature"/>
+      <output messageLabel = "temperature" element = "xs:integer"/>
     </operation>
-    <operation name = "setUnit">
-      <input messageLabel = "unitOfMeasure" element = "stns:unit_of_measure"/>
+    <operation name = "setScale">
+      <input messageLabel = "scale" element = "xs:string"/>
     </operation>
   </interface>
 
@@ -29,7 +19,7 @@
            interface = "tns:sensorInterface"
            type = "http://www.w3.org/ns/wsdl/http">
     <operation ref = "tns:fetchTemperature" whttp:method = "GET"/>
-    <operation ref = "tns:setUnit" whttp:method = "PUT"/>
+    <operation ref = "tns:setScale" whttp:method = "PUT"/>
   </binding>
 
   <service name = "sensorService"

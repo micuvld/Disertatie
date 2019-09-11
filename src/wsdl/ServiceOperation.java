@@ -2,6 +2,7 @@ package wsdl;
 
 import lombok.Builder;
 import lombok.Data;
+import models.ModeledParam;
 import rest.HttpMethod;
 
 import java.util.List;
@@ -11,5 +12,5 @@ import java.util.List;
 public class ServiceOperation {
     private final String operationName;
     private final HttpMethod httpMethod;
-    private final List<OperationParameter> parameters;
+    private final List<ModeledParam> parameters;
 }

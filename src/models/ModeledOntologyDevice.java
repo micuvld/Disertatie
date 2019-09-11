@@ -1,4 +1,4 @@
-package ontologies;
+package models;
 
 import lombok.Data;
 
@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class ModeledDevice {
+public class ModeledOntologyDevice {
     //primary methods: methods that are mandatory to be present
     private List<ModeledMethod> primaryMethods;
+    //secondary methods: methods that can be integrated with human assistance
     private List<ModeledMethod> secondaryMethods;
 
-    public ModeledDevice() {
+    public ModeledOntologyDevice() {
         this.primaryMethods = new ArrayList<>();
         this.secondaryMethods = new ArrayList<>();
     }
@@ -23,5 +24,5 @@ public class ModeledDevice {
     public void addSecondaryMethod(ModeledMethod modeledMethod) {
         this.secondaryMethods.add(modeledMethod);
     }
-    //secondary methods: methods that can be integrated with human assistance
+
 }
