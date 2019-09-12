@@ -58,7 +58,7 @@ public class InterfaceGenerator {
 
             for (OWLClassExpression eqCls : deviceClass.asOWLClass().getEquivalentClasses(ontology)) {
                 //create the expected model using the ontology
-                dive(eqCls, expectedModel);
+                appendMethods(eqCls, expectedModel);
             }
         }
 
@@ -121,10 +121,10 @@ public class InterfaceGenerator {
         return modeledWSDLDevice;
     }
 
-    public void dive(OWLClassExpression ce, ModeledOntologyDevice modeledOntologyDevice) {
+    public void appendMethods(OWLClassExpression ce, ModeledOntologyDevice modeledOntologyDevice) {
         switch (ce.getClassExpressionType()) {
             case OBJECT_INTERSECTION_OF:
-                ce.asConjunctSet().forEach(subCe -> dive(subCe, modeledOntologyDevice));
+                ce.asConjunctSet().forEach(subCe -> appendMethods(subCe, modeledOntologyDevice));
                 break;
             case OBJECT_MIN_CARDINALITY:
                 OWLObjectMinCardinality minCardinality = ((OWLObjectMinCardinality) ce);
