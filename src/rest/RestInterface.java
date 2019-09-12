@@ -16,24 +16,19 @@ import java.util.stream.Collectors;
 public class RestInterface {
     @JsonProperty("deviceLabel")
     private String deviceLabel;
-    @JsonProperty("endpoint")
-    private String endpoint;
     @JsonProperty("methods")
     private List<RestMethod> methods;
 
     @JsonCreator
     public RestInterface(@JsonProperty("deviceLabel") String deviceLabel,
-                         @JsonProperty("endpoint") String endpoint,
                          @JsonProperty("methods") List<RestMethod> methods) {
         this.deviceLabel = deviceLabel;
-        this.endpoint = endpoint;
         this.methods = methods;
     }
 
     public static RestInterface fromModeledDevice(ModeledOntologyDevice modeledOntologyDevice, WsdlPojo wsdlPojo) {
         return RestInterface.builder()
                 .deviceLabel(modeledOntologyDevice.getDeviceLabel())
-                .endpoint(wsdlPojo.getEndpoint())
                 .methods(getRestMethods(modeledOntologyDevice))
                 .build();
     }
@@ -51,10 +46,8 @@ public class RestInterface {
     @Override
     public String toString() {
         return String.format("Device Label: %s\n" +
-                        "Host: %s\n" +
                         "Methods: \n\n%s",
                 deviceLabel,
-                endpoint,
                 methods.stream().map(RestMethod::toString).collect(Collectors.joining("\n-----\n")));
     }
 }
