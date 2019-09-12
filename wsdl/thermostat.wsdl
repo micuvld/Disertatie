@@ -1,12 +1,12 @@
 <?xml version = "1.0" encoding = "utf-8" ?>
 <description
         xmlns = "http://www.w3.org/ns/wsdl"
-        targetNamespace = "http://www.sensors.com/"
-        xmlns:tns = "http://www.sensors.com/"
+        targetNamespace = "http://www.thermostat.com/"
+        xmlns:tns = "http://www.thermostat.com/"
         xmlns:xs = "http://www.w3.org/2001/XMLSchema"
         xmlns:whttp="http://www.w3.org/ns/wsdl/http">
 
-  <interface name = "sensorInterface">
+  <interface name = "thermostatInterface">
     <operation name = "fetchTemperature">
       <output messageLabel = "temperature" element = "xs:double"/>
     </operation>
@@ -18,23 +18,31 @@
     </operation>
   </interface>
 
-  <binding name = "sensorApi"
-           interface = "tns:sensorInterface"
+  <binding name = "temperatureApi"
+           interface = "tns:thermostatInterface"
            type = "http://www.w3.org/ns/wsdl/http">
     <operation ref = "tns:fetchTemperature" whttp:method = "GET"/>
-    <operation ref = "tns:configureThreshold" whttp:method = "PUT"/>
     <operation ref = "tns:setScale" whttp:method = "PUT"/>
   </binding>
 
-  <service name = "sensorService"
-           interface = "tns:sensorInterface">
+  <binding name = "triggerApi"
+           interface = "tns:thermostatInterface"
+           type = "http://www.w3.org/ns/wsdl/http">
+    <operation ref = "tns:configureThreshold" whttp:method = "PUT"/>
+  </binding>
+
+  <service name = "thermostatService"
+           interface = "tns:thermostatInterface">
     <documentation>
       This service encapsulates a thermostat device. The device is capturing the temperature and offering methods to set a desired temperature.
       Depending on the temperature level that is configured, the device will trigger an output signal that can be wired to a heating device.
       This sensor offers HTTP methods for fetching the current temperature measured by the sensor and setting the threshold for the output trigger.
     </documentation>
-    <endpoint name = "sensorEndpoint"
-              binding = "tns:sensorApi"
-              address = "http://sensors.com/thermostat"/>
+    <endpoint name = "temperatureEndpoint"
+              binding = "tns:temperatureApi"
+              address = "http://sensors.com/temperature_sensor"/>
+    <endpoint name = "triggerEndpoint"
+              binding = "tns:triggerApi"
+              address = "http://sensors.com/trigger"/>
   </service>
 </description>

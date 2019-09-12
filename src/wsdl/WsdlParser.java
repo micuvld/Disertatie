@@ -60,6 +60,8 @@ public class WsdlParser {
                         .operationName(name)
                         .httpMethod(getMethodOfBindingOperation(bo))
                         .parameters(parameters)
+                        .path(ep.getAddress().getPath())
+                        .host(ep.getAddress().getHost())
                         .build();
                 serviceOperations.add(serviceOperation);
             });

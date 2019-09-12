@@ -21,29 +21,39 @@ public class RestMethod {
     private String label;
     @JsonProperty("httpMethod")
     private HttpMethod httpMethod;
-    @JsonProperty("path")
-    private String path;
+    @JsonProperty("name")
+    private String name;
     @JsonProperty("params")
     private List<ModeledParam> params;
+    @JsonProperty("path")
+    private String path;
+    @JsonProperty("host")
+    private String host;
 
     @JsonCreator
     public RestMethod(
             @JsonProperty("label") String label,
             @JsonProperty("httpMethod") HttpMethod httpMethod,
+            @JsonProperty("name") String name,
+            @JsonProperty("params") List<ModeledParam> params,
             @JsonProperty("path") String path,
-            @JsonProperty("params") List<ModeledParam> params) {
+            @JsonProperty("host") String host) {
         this.label = label;
         this.httpMethod = httpMethod;
-        this.path = path;
+        this.name = name;
         this.params = params;
+        this.path = path;
+        this.host = host;
     }
 
     public static RestMethod fromModeledMethod(ModeledMethod method) {
         return RestMethod.builder()
                 .httpMethod(method.getHttpMethod())
                 .label(buildLabel(method.getClasses()))
-                .path(method.getName())
+                .name(method.getName())
                 .params(method.getParams())
+                .path(method.getPath())
+                .host(method.getHost())
                 .build();
     }
 
@@ -58,10 +68,14 @@ public class RestMethod {
 
     @Override
     public String toString() {
-        return String.format("Label:%s\n" +
-                        "Request Header: %s /%s HTTP/1.1\n" +
+        return String.format("Label: %s\n" +
+                        "Name: %s\n" +
+                        "Host: %s\n" +
+                        "Request Line: %s %s HTTP/1.1\n" +
                         "Parameters: \n%s",
                 label,
+                name,
+                host,
                 httpMethod,
                 path,
                 params.stream()

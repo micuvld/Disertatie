@@ -91,6 +91,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#action -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#action"/>
+    
+
+
     <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#config -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#config">
@@ -172,7 +178,7 @@
     <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#put">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#verb"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#action"/>
     </owl:Class>
     
 
@@ -243,29 +249,15 @@
     
 
 
-    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#thermostat -->
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#trigger -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#thermostat">
+    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#trigger">
         <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasPrimaryMethod"/>
-                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
-                        <owl:onClass rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#get_physical_quantity"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasPrimaryMethod"/>
-                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
-                        <owl:onClass rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#set_double_config"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasSecondaryMethod"/>
-                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
-                        <owl:onClass rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#set_integer_config"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#hasPrimaryMethod"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#set_double_config"/>
+            </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#device"/>
     </owl:Class>
@@ -278,16 +270,10 @@
     
 
 
-    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#verb -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#verb"/>
-    
-
-
     <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#verb"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#action"/>
     </owl:Class>
     
 
@@ -308,12 +294,6 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#acquire">
         <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/SensorAPI#get"/>
     </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#actuator -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#actuator"/>
     
 
 
@@ -530,7 +510,14 @@
     <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#thermostat -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#thermostat">
-        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#thermostat"/>
+        <rdf:type>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#sensor"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#trigger"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdf:type>
     </owl:NamedIndividual>
     
 
@@ -539,6 +526,14 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#threshold">
         <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#config"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#trigger -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#trigger">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vlad/ontologies/2019/8/Disertatie#trigger"/>
     </owl:NamedIndividual>
     
 

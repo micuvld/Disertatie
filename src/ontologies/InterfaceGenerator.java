@@ -51,29 +51,31 @@ public class InterfaceGenerator {
             deviceClasses = deviceType.asConjunctSet();
         }
 
+        ModeledOntologyDevice expectedModel = new ModeledOntologyDevice();
         //go through each device class and gather the primary and secondary methods
         for (OWLClassExpression deviceClass : deviceClasses) {
             //equivalent classes are the methods of the device
+
             for (OWLClassExpression eqCls : deviceClass.asOWLClass().getEquivalentClasses(ontology)) {
-                ModeledOntologyDevice expectedModel = new ModeledOntologyDevice();
                 //create the expected model using the ontology
                 dive(eqCls, expectedModel);
-
-                //create the wsdl model, using the information from the WSDL and the ontology
-                ModeledWSDLDevice modeledWSDLDevice = getWsdlModeledDevice(wsdlPojo);
-
-                //get the actual matching model, which consists of the methods from the expectedModel that have
-                //a match in the wsdl model
-                matchingModel = getMatchingModel(expectedModel, modeledWSDLDevice);
-                matchingModel.setDeviceLabel(deviceLabel);
-                //if not all of the primary methods from the expected model have a match in the wsdl model
-                //then we consider that the device is invalid, because it can't provide the functionalities
-                //that we expect it to
-                if (matchingModel.getPrimaryMethods().size() < expectedModel.getPrimaryMethods().size()) {
-                    throw new PrimaryMethodsNotMatchingException();
-                }
             }
         }
+
+        //create the wsdl model, using the information from the WSDL and the ontology
+        ModeledWSDLDevice modeledWSDLDevice = getWsdlModeledDevice(wsdlPojo);
+
+        //get the actual matching model, which consists of the methods from the expectedModel that have
+        //a match in the wsdl model
+        matchingModel = getMatchingModel(expectedModel, modeledWSDLDevice);
+        matchingModel.setDeviceLabel(deviceLabel);
+        //if not all of the primary methods from the expected model have a match in the wsdl model
+        //then we consider that the device is invalid, because it can't provide the functionalities
+        //that we expect it to
+        if (matchingModel.getPrimaryMethods().size() < expectedModel.getPrimaryMethods().size()) {
+            throw new PrimaryMethodsNotMatchingException();
+        }
+
 
         return matchingModel;
     }
@@ -108,8 +110,10 @@ public class InterfaceGenerator {
                             .collect(Collectors.toList()));
                     modeledMethod.setHttpMethod(wsdlOperation.getHttpMethod());
                     modeledMethod.setParams(wsdlOperation.getParameters().stream()
-                            .map(wsdlOp -> new ModeledParam(wsdlOp.getName(), wsdlOp.getDirection(), wsdlOp.getParamType()))
+                            .map(wsdlParam -> new ModeledParam(wsdlParam.getName(), wsdlParam.getDirection(), wsdlParam.getParamType()))
                             .collect(Collectors.toList()));
+                    modeledMethod.setPath(wsdlOperation.getPath());
+                    modeledMethod.setHost(wsdlOperation.getHost());
                     modeledWSDLDevice.addMethod(modeledMethod);
                 }
         );

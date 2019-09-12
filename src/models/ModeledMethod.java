@@ -1,8 +1,6 @@
 package models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import rest.HttpMethod;
 
 import java.util.ArrayList;
@@ -14,6 +12,8 @@ public class ModeledMethod {
     private HttpMethod httpMethod;
     private List<ModeledClass> classes;
     private List<ModeledParam> params;
+    private String path;
+    private String host;
 
     public ModeledMethod () {
         this.classes = new ArrayList<>();

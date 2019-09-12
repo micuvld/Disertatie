@@ -25,6 +25,7 @@ public class RestInterface {
     public RestInterface(@JsonProperty("deviceLabel") String deviceLabel,
                          @JsonProperty("endpoint") String endpoint,
                          @JsonProperty("methods") List<RestMethod> methods) {
+        this.deviceLabel = deviceLabel;
         this.endpoint = endpoint;
         this.methods = methods;
     }

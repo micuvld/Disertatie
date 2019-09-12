@@ -13,4 +13,6 @@ public class ServiceOperation {
     private final String operationName;
     private final HttpMethod httpMethod;
     private final List<ModeledParam> parameters;
+    private final String path;
+    private final String host;
 }
