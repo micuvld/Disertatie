@@ -32,28 +32,22 @@ public class InterfaceGenerator {
 
     public ModeledOntologyDevice getMatchingModel(WsdlPojo wsdlPojo, String deviceLabel)
             throws PrimaryMethodsNotMatchingException, InvalidIndividualException {
-        ModeledOntologyDevice matchingModel = null;
+        ModeledOntologyDevice matchingModel;
         OWLIndividual owlIndividual = dataFactory.getOWLNamedIndividual(IRI.create(baseIri, deviceLabel));
 
-        Set<OWLClassExpression> deviceTypes = owlIndividual.getTypes(ontology); //it will give the device types
+        //find the device types
+        //devices have a single type that may be a single class or a conjunction of multiple classes
+        //if the type is a conjunction of multiple classes, it means that we have a complex device built from
+        //functionalities of multiple basic devices
+        //the reasoner will convert the ObjectIntersectionOf into a set of classes
+        Set<OWLClass> deviceTypes = reasoner.getTypes(owlIndividual.asOWLNamedIndividual(), true).getFlattened();
         if (!deviceTypes.iterator().hasNext()) {
             throw new InvalidIndividualException();
         }
 
-        //devices have a single type that may be a single class or a conjunction of multiple classes
-        //if the type is a conjunction of multiple classes, it means that we have a complex device built from
-        //functionalities of multiple basic devices
-        OWLClassExpression deviceType = deviceTypes.iterator().next();
-        Set<OWLClassExpression> deviceClasses = new HashSet<>();
-        if (deviceType.getClassExpressionType().equals(ClassExpressionType.OWL_CLASS)) {
-            deviceClasses.add(deviceType.asOWLClass());
-        } else if (deviceType.getClassExpressionType().equals(ClassExpressionType.OBJECT_INTERSECTION_OF)) {
-            deviceClasses = deviceType.asConjunctSet();
-        }
-
         ModeledOntologyDevice expectedModel = new ModeledOntologyDevice();
         //go through each device class and gather the primary and secondary methods
-        for (OWLClassExpression deviceClass : deviceClasses) {
+        for (OWLClassExpression deviceClass : deviceTypes) {
             //equivalent classes are the methods of the device
 
             for (OWLClassExpression eqCls : deviceClass.asOWLClass().getEquivalentClasses(ontology)) {
@@ -214,9 +208,5 @@ public class InterfaceGenerator {
         tokens.add(tokenBuilder.toString());
 
         return tokens;
-    }
-
-    private String getClassName(OWLClass owlClass) {
-        return owlClass.getIRI().getFragment();
     }
 }
